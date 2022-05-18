@@ -13,12 +13,13 @@
         }
     },
     "require": {
-        "php": "^7.1.3",
+        "php": ">=7.1.3",
+        "doctrine/annotations": "^1.13",
         "doctrine/doctrine-bundle": "^2.4",
         "doctrine/doctrine-cache-bundle": "^1.2",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.9",
+        "doctrine/orm": "^2.8.2",
         "fakerphp/faker": "^1.19",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "4.4.*",
@@ -40,7 +41,8 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "9",
+        "phpunit/php-invoker": "^3.1",
+        "phpunit/phpunit": "^9.5",
         "symfony/dotenv": "4.4.*",
         "symfony/phpunit-bridge": "^6.0",
         "symfony/stopwatch": "4.4.*",
