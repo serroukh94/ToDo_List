@@ -28,10 +28,10 @@ class TaskController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $em->persist($task);
+            $em->persist($task->setAuthor($this->getUser()));
             $em->flush();
 
             $this->addFlash('success', 'La tâche a été bien été ajoutée.');
@@ -51,7 +51,7 @@ class TaskController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
@@ -73,7 +73,9 @@ class TaskController extends AbstractController
         $task->toggle(!$task->isDone());
         $this->getDoctrine()->getManager()->flush();
 
-        $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+        $isDone = ($task->isDone()) ? 'faite' : 'non terminée';
+        $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme %s.', $task->getTitle(), $isDone));
+
 
         return $this->redirectToRoute('task_list');
     }
