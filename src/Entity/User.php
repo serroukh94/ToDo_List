@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -39,6 +41,21 @@ class User implements UserInterface
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity=Task::class, mappedBy="author")
+     */
+    private $tasks;
+
+    public function __construct()
+    {
+        $this->tasks = new ArrayCollection();
+    }
+
     public function getId()
     {
         return $this->id;
@@ -49,9 +66,11 @@ class User implements UserInterface
         return $this->username;
     }
 
-    public function setUsername($username)
+    public function setUsername($username): self
     {
         $this->username = $username;
+
+        return $this;
     }
 
     public function getSalt()
@@ -64,9 +83,11 @@ class User implements UserInterface
         return $this->password;
     }
 
-    public function setPassword($password)
+    public function setPassword($password): self
     {
         $this->password = $password;
+
+        return $this;
     }
 
     public function getEmail()
@@ -74,17 +95,62 @@ class User implements UserInterface
         return $this->email;
     }
 
-    public function setEmail($email)
+    public function setEmail($email): self
     {
         $this->email = $email;
+
+        return $this;
     }
 
-    public function getRoles()
+    public function getRoles(): array
     {
-        return array('ROLE_USER');
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
     }
 
     public function eraseCredentials()
     {
     }
+
+    /**
+     * @return Collection<int, Task>
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): self
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->removeElement($task)) {
+            // set the owning side to null (unless already changed)
+            if ($task->getAuthor() === $this) {
+                $task->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }
