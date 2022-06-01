@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "942f51a7c22b8e7bfa17568935a628f0",
+    "content-hash": "7f1a367bd4fab93edaee6bb3a932f3af",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1595,6 +1595,49 @@
                 }
             ],
             "time": "2022-05-05T09:31:05+00:00"
+        },
+        {
+            "name": "halloverden/symfony-doctrine-sql-logger-bundle",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/halloverden/symfony-doctrine-sql-logger-bundle.git",
+                "reference": "55e7db4438a6f64406b18b817a083b8e056be2ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/halloverden/symfony-doctrine-sql-logger-bundle/zipball/55e7db4438a6f64406b18b817a083b8e056be2ed",
+                "reference": "55e7db4438a6f64406b18b817a083b8e056be2ed",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "^2.1",
+                "php": "^7.3",
+                "symfony/monolog-bundle": "^3.5",
+                "symfony/stopwatch": "^4.4.13|^5.1.5"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "HalloVerden\\DoctrineSqlLoggerBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tom Roar Furunes",
+                    "email": "tom.roar@halloverden.no"
+                }
+            ],
+            "description": "Better logging of SQL queries in Doctrine DBAL for Symfony.",
+            "support": {
+                "issues": "https://github.com/halloverden/symfony-doctrine-sql-logger-bundle/issues",
+                "source": "https://github.com/halloverden/symfony-doctrine-sql-logger-bundle/tree/1.0.1"
+            },
+            "time": "2021-04-14T09:37:41+00:00"
         },
         {
             "name": "laminas/laminas-code",

@@ -9,40 +9,40 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 class UserTest extends TestCase
 {
-    public function testGetId()
+    public function testGetId(): void
     {
         $user = new User();
         static::assertEquals($user->getId(), null);
     }
 
-    public function testGetSetUsername()
+    public function testGetSetUsername(): void
     {
         $user = new User();
         $user->setUsername('Test username');
-        static::assertEquals($user->getUsername(), 'Test username');
+        static::assertEquals('Test username', $user->getUsername());
     }
 
     public function testGetSetPassword()
     {
         $user = new User();
         $user->setPassword('Test password');
-        static::assertEquals($user->getPassword(), 'Test password');
+        static::assertEquals('Test password', $user->getPassword());
     }
 
-    public function testGetSetEmail()
+    public function testGetSetEmail(): void
     {
         $user = new User();
         $user->setEmail('Test@email.com');
-        static::assertEquals($user->getEmail(), 'Test@email.com');
+        static::assertEquals('Test@email.com', $user->getEmail());
     }
 
-    public function testGetSalt()
+    public function testGetSalt(): void
     {
         $user = new User();
-        static::assertEquals($user->getSalt(), null);
+        static::assertEquals(null, $user->getSalt());
     }
 
-    public function testGetAddTask()
+    public function testGetAddTask(): void
     {
         $user = new User();
         static::assertInstanceOf(User::class, $user->AddTask(new Task()));
@@ -50,7 +50,7 @@ class UserTest extends TestCase
         static::assertContainsOnlyInstancesOf(Task::class, $user->getTasks());
     }
 
-    public function testRemoveTask()
+    public function testRemoveTask(): void
     {
         $user = new User();
         // If there is not the Task in the ArrayCollection
@@ -65,16 +65,16 @@ class UserTest extends TestCase
         static::assertInstanceOf(User::class, $user->removeTask(new Task()));
     }
 
-    public function testGetSetRoles()
+    public function testGetSetRoles(): void
     {
         $user = new User();
         $user->setRoles(['ROLE_ADMIN']);
-        static::assertEquals($user->getRoles(), ['ROLE_ADMIN', 'ROLE_USER']);
+        static::assertEquals(['ROLE_ADMIN', 'ROLE_USER'], $user->getRoles());
     }
 
-    public function testEraseCredentials()
+    public function testEraseCredentials(): void
     {
         $user = new User();
-        static::assertEquals($user->eraseCredentials(), null);
+        static::assertEquals(null, $user->eraseCredentials());
     }
 }
