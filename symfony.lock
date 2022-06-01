@@ -265,6 +265,9 @@
             "./config/bootstrap.php"
         ]
     },
+    "symfony/css-selector": {
+        "version": "v4.4.37"
+    },
     "symfony/debug": {
         "version": "v4.4.41"
     },
