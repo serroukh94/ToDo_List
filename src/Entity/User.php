@@ -16,6 +16,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class User implements UserInterface
 {
+
+    const ROLE_USER= 'ROLE_USER';
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -50,6 +53,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Task::class, mappedBy="author")
      */
     private $tasks;
+
 
     public function __construct()
     {
@@ -142,11 +146,9 @@ class User implements UserInterface
 
     public function removeTask(Task $task): self
     {
-        if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
-            if ($task->getAuthor() === $this) {
-                $task->setAuthor(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->tasks->removeElement($task) && $task->getAuthor() === $this) {
+            $task->setAuthor(null);
         }
 
         return $this;

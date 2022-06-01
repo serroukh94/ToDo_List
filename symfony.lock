@@ -106,6 +106,9 @@
     "laminas/laminas-code": {
         "version": "4.5.1"
     },
+    "liip/test-fixtures-bundle": {
+        "version": "2.4.0"
+    },
     "monolog/monolog": {
         "version": "1.27.0"
     },
@@ -237,6 +240,9 @@
     "symfony/asset": {
         "version": "v4.4.40"
     },
+    "symfony/browser-kit": {
+        "version": "v4.4.37"
+    },
     "symfony/cache": {
         "version": "v4.4.41"
     },
@@ -270,6 +276,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v4.4.41"
+    },
+    "symfony/dom-crawler": {
+        "version": "v4.4.42"
     },
     "symfony/dotenv": {
         "version": "v4.4.37"

@@ -2,3 +2,24 @@
 
 namespace App\Tests\Controller;
 
+use App\DataFixtures\TestFixtures;
+use App\Controller\DefaultController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class DefaultControllerTest extends WebTestCase
+{
+    public function testIndexActionWithoutLogin(): void
+    {
+        // If the user isn't logged, should redirect to the login page
+        $client = static::createClient();
+        $client->request('GET', '/');
+        static::assertSame(302, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->followRedirect();
+        // Test if login field exists
+        static::assertSame(1, $crawler->filter('input[name="_username"]')->count());
+        static::assertSame(1, $crawler->filter('input[name="_password"]')->count());
+    }
+}
