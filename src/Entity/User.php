@@ -65,6 +65,14 @@ class User implements UserInterface
         return $this->id;
     }
 
+    // Only used for test fixtures
+    public function setId($id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getUsername()
     {
         return $this->username;
@@ -82,7 +90,7 @@ class User implements UserInterface
         return null;
     }
 
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }

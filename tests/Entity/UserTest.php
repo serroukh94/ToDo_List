@@ -4,15 +4,15 @@ namespace App\Tests\Entity;
 
 use App\Entity\Task;
 use App\Entity\User;
-use PHPUnit\Framework\TestCase;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class UserTest extends TestCase
+class UserTest extends KernelTestCase
 {
     public function testGetId(): void
     {
         $user = new User();
-        static::assertEquals($user->getId(), null);
+        static::assertEquals(null, $user->getId());
     }
 
     public function testGetSetUsername(): void
@@ -22,7 +22,7 @@ class UserTest extends TestCase
         static::assertEquals('Test username', $user->getUsername());
     }
 
-    public function testGetSetPassword()
+    public function testGetSetPassword(): void
     {
         $user = new User();
         $user->setPassword('Test password');

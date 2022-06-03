@@ -4,9 +4,9 @@ namespace App\Tests\Entity;
 
 use App\Entity\Task;
 use App\Entity\User;
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class TaskTest extends TestCase
+class TaskTest extends KernelTestCase
 {
     public function testGetId(): void
     {

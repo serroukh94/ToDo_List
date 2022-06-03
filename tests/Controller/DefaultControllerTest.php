@@ -2,7 +2,7 @@
 
 namespace App\Tests\Controller;
 
-use App\DataFixtures\TestFixtures;
+use App\DataFixtures\Test\TestFixtures;
 use App\Controller\DefaultController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Console\Input\StringInput;
