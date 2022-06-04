@@ -129,7 +129,7 @@ class TaskControllerTest extends DataFixtureTestCase
         $securityControllerTest = new SecurityControllerTest();
         $client = $securityControllerTest->testLogin();
 
-        $crawler = $client->request('GET', '/tasks/-100/delete');
+        $client->request('GET', '/tasks/-100/delete');
         static::assertSame(404, $client->getResponse()->getStatusCode());
     }
 
@@ -138,7 +138,7 @@ class TaskControllerTest extends DataFixtureTestCase
         $securityControllerTest = new SecurityControllerTest();
         $client = $securityControllerTest->testLogin();
 
-        $crawler = $client->request('GET', '/tasks/1/toggle');
+        $client->request('GET', '/tasks/1/toggle');
         static::assertSame(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
