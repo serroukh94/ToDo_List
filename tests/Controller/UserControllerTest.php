@@ -23,8 +23,8 @@ class UserControllerTest extends DataFixtureTestCase
 
     public function testListAction(): void
     {
-        $securityControllerTest = new SecurityControllerTest();
-        $client = $securityControllerTest->testLoginAsAdmin();
+        $securityController = new SecurityControllerTest();
+        $client = $securityController->testLoginAsAdmin();
 
         $crawler = $client->request('GET', '/users');
         static::assertSame(200, $client->getResponse()->getStatusCode());
@@ -33,8 +33,8 @@ class UserControllerTest extends DataFixtureTestCase
 
     public function testEditAction(): void
     {
-        $securityControllerTest = new SecurityControllerTest();
-        $client = $securityControllerTest->testLoginAsAdmin();
+        $securityController = new SecurityControllerTest();
+        $client = $securityController->testLoginAsAdmin();
 
         $crawler = $client->request('GET', '/users/2/edit');
         static::assertSame(200, $client->getResponse()->getStatusCode());
@@ -61,8 +61,8 @@ class UserControllerTest extends DataFixtureTestCase
 
     public function testCreateAction(): void
     {
-        $securityControllerTest = new SecurityControllerTest();
-        $client = $securityControllerTest->testLoginAsAdmin();
+        $securityController = new SecurityControllerTest();
+        $client = $securityController->testLoginAsAdmin();
 
         $crawler = $client->request('GET', '/users/create');
         static::assertSame(200, $client->getResponse()->getStatusCode());
