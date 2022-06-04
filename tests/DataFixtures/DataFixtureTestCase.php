@@ -4,7 +4,7 @@ namespace App\Tests\DataFixtures;
 
 use Doctrine\ORM\EntityManager;
 use Exception;
-use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -15,7 +15,7 @@ class DataFixtureTestCase extends WebTestCase
     /** @var  Application $application */
     protected static $application;
 
-    /** @var  Client $client */
+    /** @var  KernelBrowser $client */
     protected $client;
 
     /** @var  ContainerInterface $container */
