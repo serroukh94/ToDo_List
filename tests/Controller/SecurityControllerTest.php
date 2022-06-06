@@ -3,12 +3,13 @@
 namespace App\Tests\Controller;
 
 use App\Tests\DataFixtures\DataFixtureTestCase;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 
 class SecurityControllerTest extends DataFixtureTestCase
 {
-    public function testLogin()
+    public function testLogin(): KernelBrowser
     {
         self::ensureKernelShutdown();
         $client = static::createClient();
@@ -35,7 +36,7 @@ class SecurityControllerTest extends DataFixtureTestCase
         return $client;
     }
 
-    public function testLoginAsAdmin()
+    public function testLoginAsAdmin(): KernelBrowser
     {
         self::ensureKernelShutdown();
         $client = static::createClient();
@@ -62,7 +63,7 @@ class SecurityControllerTest extends DataFixtureTestCase
         return $client;
     }
 
-    public function testLoginWithBadCredentials()
+    public function testLoginWithBadCredentials(): void
     {
         self::ensureKernelShutdown();
         $client = static::createClient();
