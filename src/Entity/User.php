@@ -18,8 +18,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class User implements UserInterface
 {
 
-    const ROLE_USER= 'ROLE_USER';
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -59,6 +57,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+        $this->roles = ['ROLE_USER'];
     }
 
     public function getId()
