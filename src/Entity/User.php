@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Table("user")
  * @ORM\Entity
+ * @UniqueEntity("username")
  * @UniqueEntity("email")
  */
 class User implements UserInterface
