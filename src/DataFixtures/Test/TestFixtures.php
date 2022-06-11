@@ -54,10 +54,10 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         // Simple User
         $user = new User();
         $user->setId(2)
-            ->setUsername('user')
-            ->setEmail('user@example.org')
-            ->setPassword($this->encoder->encodePassword($user, 'test'))
-            ->setRoles(['ROLE_USER'])
+             ->setUsername('user')
+             ->setEmail('user@example.org')
+             ->setPassword($this->encoder->encodePassword($user, 'test'))
+             ->setRoles(['ROLE_USER'])
         ;
         $manager->persist($user);
         $this->addReference('user-simple', $user);
@@ -65,36 +65,36 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         // Tâche crée par utilisateur simple (Seul auteur peut la delete)
         $task = new Task();
         $task->setId(1) // Edition par utilisateur simple
-        ->setTitle('Test utilisateur simple')
-            ->setContent('Tâche utilisé pour les tests')
-            ->setAuthor($this->getReference('user-simple'))
+             ->setTitle('Test utilisateur simple')
+             ->setContent('Tâche utilisé pour les tests')
+             ->setAuthor($this->getReference('user-simple'))
         ;
         $manager->persist($task);
 
         // Tâche crée par utilisateur simple (Seul auteur peut la delete)
         $task = new Task();
         $task->setId(2) // Suppression par utilisateur simple qui est l'auteur
-        ->setTitle('Test utilisateur simple')
-            ->setContent('Tâche utilisé pour les tests')
-            ->setAuthor($this->getReference('user-simple'))
+             ->setTitle('Test utilisateur simple')
+             ->setContent('Tâche utilisé pour les tests')
+             ->setAuthor($this->getReference('user-simple'))
         ;
         $manager->persist($task);
 
         // Tâche créer par utilisateur anonyme (Seul admin peut la delete)
         $task = new Task();
         $task->setId(3) // Suppression par utilisateur simple (Doit être refusé)
-        ->setTitle('Test utilisateur anonyme')
-            ->setContent('Tâche utilisé pour les tests')
-            ->setAuthor($this->getReference('user-anonymous'))
+             ->setTitle('Test utilisateur anonyme')
+             ->setContent('Tâche utilisé pour les tests')
+             ->setAuthor($this->getReference('user-anonymous'))
         ;
         $manager->persist($task);
 
         // Tâche créer par admin (Seul l'auteur peut la delete)
         $task = new Task();
         $task->setId(4)
-            ->setTitle('Test admin')
-            ->setContent('Tâche utilisé pour les tests')
-            ->setAuthor($this->getReference('user-admin'))
+             ->setTitle('Test admin')
+             ->setContent('Tâche utilisé pour les tests')
+             ->setAuthor($this->getReference('user-admin'))
         ;
         $manager->persist($task);
 

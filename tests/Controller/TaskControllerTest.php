@@ -2,9 +2,8 @@
 
 namespace App\Tests\Controller;
 
-use App\Tests\Controller\SecurityControllerTest;
 use App\Tests\DataFixtures\DataFixtureTestCase;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
 
 class TaskControllerTest extends DataFixtureTestCase
 {
@@ -91,7 +90,8 @@ class TaskControllerTest extends DataFixtureTestCase
         static::assertSame(200, $client->getResponse()->getStatusCode());
 
         // Test if success message is displayed
-        static::assertStringContainsString("Superbe ! La tâche a bien été supprimée.", $crawler->filter('div.alert.alert-success')->text());
+        static::assertStringContainsString("Superbe ! La tâche a bien été supprimée.",
+            $crawler->filter('div.alert.alert-success')->text());
     }
 
     public function testDeleteTaskActionWhereSimpleUserIsNotAuthor(): void
@@ -106,7 +106,8 @@ class TaskControllerTest extends DataFixtureTestCase
         static::assertSame(200, $client->getResponse()->getStatusCode());
 
         // Test if success message is displayed
-        static::assertStringContainsString("Oops ! Seul l'auteur de la tâche ou un admin peut la supprimer !", $crawler->filter('div.alert.alert-danger')->text());
+        static::assertStringContainsString("Oops ! Seul l'auteur de la tâche ou un admin peut la supprimer !",
+            $crawler->filter('div.alert.alert-danger')->text());
     }
 
     public function testDeleteTaskActionWithSimpleUserWhereAuthorIsAnonymous(): void
@@ -121,7 +122,8 @@ class TaskControllerTest extends DataFixtureTestCase
         static::assertSame(200, $client->getResponse()->getStatusCode());
 
         // Test if success message is displayed
-        static::assertStringContainsString("Oops ! Seul un admin peut supprimer une tâche de l'utilisateur anonyme !", $crawler->filter('div.alert.alert-danger')->text());
+        static::assertStringContainsString("Oops ! Seul un admin peut supprimer une tâche de l'utilisateur anonyme !",
+            $crawler->filter('div.alert.alert-danger')->text());
     }
 
     public function testDeleteTaskActionWhereItemDontExists(): void
