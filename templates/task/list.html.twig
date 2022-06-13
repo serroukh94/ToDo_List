@@ -15,19 +15,35 @@
                         {% endif %}
                     </h4>
                     <h4>
-                        <a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a>
+                        {% if is_granted('TASK_EDIT', task) %}
+                            <a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a>
+                        {% else %}
+                            {{ task.title }}
+                        {% endif %}
                     </h4>
                     <p>{{ task.content }}</p>
                 </div>
                 <div>
-                    <form action="{{ path('task_toggle', {'id' : task.id }) }}">
+                    {% if is_granted('TASK_TOGGLE', task) %}
+                      <form action="{{ path('task_toggle', {'id' : task.id }) }}">
                         <button class="btn btn-success btn-sm pull-right">
-                            {% if not task.isDone %}Marquer comme faite{% else %}Marquer non terminée{% endif %}
+                            {% if not task.isDone %}
+                                Marquer comme faite
+                            {% else %}
+                                Marquer non terminée
+                            {% endif %}
                         </button>
-                    </form>
-                    <form action="{{ path('task_delete', {'id' : task.id }) }}">
-                        <button class="btn btn-danger btn-sm pull-right">Supprimer</button>
-                    </form>
+                      </form>
+                    {% endif %}
+                    {% if is_granted('TASK_DELETE', task) %}
+                        <form action="{{ path('task_delete', {'id' : task.id }) }}" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button class="btn btn-danger btn-sm pull-right">Supprimer</button>
+                        </form>
+                    {% endif %}
+                </div>
+                <div class="panel-footer">
+                    {{ task.author is null ? '' : ('Auteur : <span class="task-author">' ~ task.author.username ~ '</span>')|raw }}
                 </div>
             </div>
         </div>

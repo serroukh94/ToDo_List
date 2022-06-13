@@ -94,37 +94,9 @@ class TaskControllerTest extends DataFixtureTestCase
             $crawler->filter('div.alert.alert-success')->text());
     }
 
-    public function testDeleteTaskActionWhereSimpleUserIsNotAuthor(): void
-    {
-        $securityControllerTest = new SecurityControllerTest();
-        $client = $securityControllerTest->testLogin();
 
-        $crawler = $client->request('GET', '/tasks/4/delete');
-        static::assertSame(302, $client->getResponse()->getStatusCode());
 
-        $crawler = $client->followRedirect();
-        static::assertSame(200, $client->getResponse()->getStatusCode());
 
-        // Test if success message is displayed
-        static::assertStringContainsString("Oops ! Seul l'auteur de la tâche ou un admin peut la supprimer !",
-            $crawler->filter('div.alert.alert-danger')->text());
-    }
-
-    public function testDeleteTaskActionWithSimpleUserWhereAuthorIsAnonymous(): void
-    {
-        $securityControllerTest = new SecurityControllerTest();
-        $client = $securityControllerTest->testLogin();
-
-        $crawler = $client->request('GET', '/tasks/3/delete');
-        static::assertSame(302, $client->getResponse()->getStatusCode());
-
-        $crawler = $client->followRedirect();
-        static::assertSame(200, $client->getResponse()->getStatusCode());
-
-        // Test if success message is displayed
-        static::assertStringContainsString("Oops ! Seul un admin peut supprimer une tâche de l'utilisateur anonyme !",
-            $crawler->filter('div.alert.alert-danger')->text());
-    }
 
     public function testDeleteTaskActionWhereItemDontExists(): void
     {

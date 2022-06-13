@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,6 +47,8 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/tasks/{id}/edit", name="task_edit")
+     * @IsGranted("TASK_EDIT", subject="task",
+     *  message="Vous ne pouvez modifier que vos propres tâches (ou les tâches anonymes si vous êtes admin).")
      */
     public function editAction(Task $task, Request $request)
     {
@@ -69,6 +72,8 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/tasks/{id}/toggle", name="task_toggle")
+     * @IsGranted("TASK_TOGGLE", subject="task",
+     *  message="Vous devez avoir un rôle d'administrateur pour modifier le statut d'une tâche dont vous n'êtes pas l'auteur.")
      */
     public function toggleTaskAction(Task $task)
     {
@@ -84,27 +89,11 @@ class TaskController extends AbstractController
 
     /**
      * @Route("/tasks/{id}/delete", name="task_delete")
+     * @IsGranted("TASK_DELETE", subject="task",
+     *  message="Vous ne pouvez supprimer que vos propres tâches (ou les tâches anonymes si vous êtes admin).")
      */
     public function deleteTaskAction(Task $task)
     {
-        if ($this->getUser() !== $task->getAuthor())
-        {
-            if ($task->getAuthor()->getId() === -1)
-            {
-                if(!$this->isGranted('ROLE_ADMIN'))
-                {
-                    $this->addFlash('error', 'Seul un admin peut supprimer une tâche de l\'utilisateur anonyme !');
-                    return $this->redirectToRoute('task_list');
-                }
-            }
-
-            if(!$this->isGranted('ROLE_ADMIN'))
-            {
-                $this->addFlash('error', 'Seul l\'auteur de la tâche ou un admin peut la supprimer !');
-                return $this->redirectToRoute('task_list');
-            }
-        }
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($task);
         $em->flush();
